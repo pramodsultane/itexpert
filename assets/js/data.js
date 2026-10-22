@@ -13,7 +13,7 @@ const PORTFOLIO = {
     }
   },
 
-  presentationOrder: ['hero', 'keycloak', 'chatbot', 'components', 'maturity', 'transmission', 'learning', 'leadership', 'notes'],
+  presentationOrder: ['hero', 'keycloak', 'chatbot', 'components', 'maturity', 'transmission', 'learning', 'leadership'],
 
   panels: [
     /* ---------------------------------------------------------- 1. HERO */

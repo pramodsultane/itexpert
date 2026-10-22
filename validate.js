@@ -37,30 +37,31 @@ const deckApi = window.__deck;
 
 console.log('\n== Structure ==');
 const panels = doc.querySelectorAll('.panel');
-check('8 panels rendered', panels.length === 8, 'got ' + panels.length);
-check('8 dots rendered', doc.querySelectorAll('.dot').length === 8);
-check('deck API exposed', !!deckApi && deckApi.total === 8);
+check('7 panels rendered', panels.length === 7, 'got ' + panels.length);
+check('7 dots rendered', doc.querySelectorAll('.dot').length === 7);
+check('presenter notes page is hidden', !doc.getElementById('panel-notes'));
+check('deck API exposed', !!deckApi && deckApi.total === 7);
 
 console.log('\n== Navigation ==');
 check('starts at panel 0', deckApi.current() === 0);
 check('prev disabled at start', doc.getElementById('prev').disabled === true);
 check('next enabled at start', doc.getElementById('next').disabled === false);
 
-deckApi.go(7);
-check('can reach last panel', deckApi.current() === 7);
+deckApi.go(6);
+check('can reach last panel', deckApi.current() === 6);
 check('next disabled at end', doc.getElementById('next').disabled === true);
 check('progress full at end', doc.querySelector('#progress span').style.width === '100%');
-check('active panel is last', doc.querySelectorAll('.panel')[7].classList.contains('is-active'));
+check('active panel is last', doc.querySelectorAll('.panel')[6].classList.contains('is-active'));
 check('only one active panel', doc.querySelectorAll('.panel.is-active').length === 1);
 
 deckApi.go(-5);
-check('clamps below range', deckApi.current() === 7);
+check('clamps below range', deckApi.current() === 6);
 deckApi.go(99);
-check('clamps above range', deckApi.current() === 7);
+check('clamps above range', deckApi.current() === 6);
 
 deckApi.go(0);
 check('returns to first', deckApi.current() === 0);
-check('counter formatted', doc.getElementById('counter').textContent === '01 / 08',
+check('counter formatted', doc.getElementById('counter').textContent === '01 / 07',
   doc.getElementById('counter').textContent);
 
 console.log('\n== Keyboard ==');
@@ -73,7 +74,7 @@ check('ArrowRight advances', deckApi.current() === 1);
 key('ArrowLeft');
 check('ArrowLeft goes back', deckApi.current() === 0);
 key('End');
-check('End jumps to last', deckApi.current() === 7);
+check('End jumps to last', deckApi.current() === 6);
 key('Home');
 check('Home jumps to first', deckApi.current() === 0);
 
@@ -412,7 +413,7 @@ try {
   const fapi = fdom.window.__deck;
   fapi.go(4);
   fileOk = fapi.current() === 4 &&
-           fdom.window.document.querySelectorAll('.panel').length === 8;
+           fdom.window.document.querySelectorAll('.panel').length === 7;
   fdom.window.document.getElementById('themeToggle').click();
 } catch (e) {
   fileOk = false; fileErr = e && (e.name || e.message);
